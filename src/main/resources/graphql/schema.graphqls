@@ -1,0 +1,39 @@
+type Query {
+    getAllUsers: [User]
+    getUserById(id: ID!): User
+    getTasksByUser(userId: ID!): [Task]
+}
+
+type Mutation {
+    createUser(input: CreateUserInput!): User
+    createTask(input: CreateTaskInput!): Task
+}
+
+type User {
+    id: ID!
+    name: String,
+    tasks: [Task]
+}
+
+type Task {
+    id: ID
+    assignee: User
+    title: String
+    description: String
+    importance: Importance
+}
+
+enum Importance {
+    LOW, MEDIUM, HIGH
+}
+
+input CreateUserInput {
+    name: String
+}
+
+input CreateTaskInput {
+    userId: ID!
+    title: String
+    description: String
+    importance: Importance
+}
